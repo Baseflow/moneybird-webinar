@@ -21,7 +21,7 @@ class VehicleController extends StateNotifier<VehicleState> {
     if (state.lockState != LockState.unlocked) {
       throw InvalidStateException('Vehicle not unlocked');
     }
-    state.copyWith(lockState: LockState.locking);
+    state = state.copyWith(lockState: LockState.locking);
     Future.delayed(Duration(seconds: 1)) // Do something async
         .then((value) => state = state.copyWith(lockState: LockState.locked));
   }
@@ -30,7 +30,7 @@ class VehicleController extends StateNotifier<VehicleState> {
     if (state.lockState != LockState.locked) {
       throw InvalidStateException('Vehicle not unlocked');
     }
-    state.copyWith(lockState: LockState.unlocking);
+    state = state.copyWith(lockState: LockState.unlocking);
     Future.delayed(Duration(seconds: 1)) // Do something async
         .then((value) => state = state.copyWith(lockState: LockState.unlocked));
   }
